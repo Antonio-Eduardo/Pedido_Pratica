@@ -1,21 +1,23 @@
 package entities;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Pedido {
-    private Date momentoDaCompra;
+public class Pedido{
+    private LocalDate momentoDaCompra;
     private StatusPedido status;
-    private Cliente cliente;
+    private double precoPedido;
     private List<ItensPedido> itensPedidos = new ArrayList<>();
 
     public Pedido(){}
 
-    public Pedido(Date momentoDaCompra, StatusPedido status, Cliente cliente) {
+    public Pedido(LocalDate momentoDaCompra, StatusPedido status) {
         this.momentoDaCompra = momentoDaCompra;
         this.status = status;
-        this.cliente = cliente;
     }
     public void addItem(ItensPedido item){
         itensPedidos.add(item);
@@ -23,30 +25,57 @@ public class Pedido {
     public void removeItem(ItensPedido item){
         itensPedidos.remove(item);
     }
-    public double totaL(){
-        double soma = 0;
-        for (ItensPedido c : itensPedidos){
-            soma += c.subTotalPedido();
-        }
-        return soma;
+    public LocalDate getMomentoDaCompra() {
+        return momentoDaCompra;
+    }
+
+    public void setMomentoDaCompra(LocalDate momentoDaCompra) {
+        this.momentoDaCompra = momentoDaCompra;
+    }
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
+    }
+
+    public List<ItensPedido> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public void setItensPedidos(List<ItensPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
+    }
+
+    public double getPrecoPedido() {
+        return precoPedido;
+    }
+
+    public void setPrecoPedido(double precoPedido) {
+        this.precoPedido = precoPedido;
     }
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n--- RESUMO DO PEDIDO ---\n");
-        sb.append("Instante do Pedido: ").append(sdf.format(momentoDaCompra)).append("\n");
+        if (momentoDaCompra != null) {
+            sb.append("Instante do Pedido: ").append(momentoDaCompra.format(fmt)).append("\n");
+        } else {
+            sb.append("SEM DATA");
+        }
         sb.append("Status: ").append(status).append("\n");
-        sb.append("Cliente: ").append(cliente.getNome()).append(" (").append(cliente.getEmail()).append(")\n");
-
         sb.append("\nItens do Pedido:\n");
-        for (ItensPedido x : itensPedidos) {
-            sb.append(x); // Aqui ele já traz a linha formatada lá de cima
+
+        for (ItensPedido x : itensPedidos){
+            sb.append(x.toString());
         }
 
-        sb.append("\nVALOR TOTAL: R$ ").append(String.format("%.2f", totaL()));
+        sb.append("\nTotal do Pedido: R$ ").append(String.format("%.2f", precoPedido)).append("\n");
+        sb.append("========================\n");
 
         return sb.toString();
     }

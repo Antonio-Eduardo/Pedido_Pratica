@@ -23,3 +23,4 @@ Um pouco do que eu utilizei:
     StatusPedido: Enum que define as etapas de processamento.
 Esse por ter sido meu segundo demandou mais tempo que o terceiro, mas foi nesse projeto que comecei a entender
 como os objetos se conectam.
+atualização: Adição de serviços, Lista e reformulação do main.
