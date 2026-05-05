@@ -1,5 +1,6 @@
 Esse foi o meu segundo projeto visando praticar enumeração e composição, o terceiro já foi publicado, esse sistema simula o fluxo básico de um pedido de compra, desde os dados do cliente até o processamento dos itens e cálculo do valor total.
 Um pouco do que eu utilizei:
+
     Composição de Objetos: A classe Pedido contém uma lista de ItensPedido, e cada item está associado a um Produto.
     Enumerações: Utilizei enums para controlar os estados do pedido (PAGAMENTO_PENDENTE, PROCESSANDO, etc).
     StringBuilder: Para otimizar a geração do relatório final no método toString.
