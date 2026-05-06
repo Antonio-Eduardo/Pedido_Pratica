@@ -1,17 +1,47 @@
-Esse foi o meu segundo projeto visando praticar enumeração e composição, o terceiro já foi publicado, esse sistema simula o fluxo básico de um pedido de compra, desde os dados do cliente até o processamento dos itens e cálculo do valor total.
-Um pouco do que eu utilizei:
+#Sistema de pedidos em Java
 
-    Composição de Objetos: A classe Pedido contém uma lista de ItensPedido, e cada item está associado a um Produto.
-    Enumerações: Utilizei enums para controlar os estados do pedido (PAGAMENTO_PENDENTE, PROCESSANDO, etc).
-    StringBuilder: Para otimizar a geração do relatório final no método toString.
-    Manipulação de Datas: Uso de SimpleDateFormat para formatar a entrada e saída de datas.
-    Encapsulamento: Todos os atributos estão protegidos, sendo acessados via getters e setters.
-    Cliente: Armazena nome, e-mail e data de nascimento.
-    Produto: Define o nome e o preço base do produto.
-    ItensPedido: Representa a linha do pedido (une o produto com a quantidade e o preço de venda). Possui o método subTotalPedido().
-    Pedido: A classe central que gerencia o cliente, o status e a lista de itens. Possui o método totaL() para somar o fechamento do carrinho.
-    StatusPedido: Enum que define as etapas de processamento.
-Esse por ter sido meu segundo demandou mais tempo que o terceiro, mas foi nesse projeto que comecei a entender
-como os objetos se conectam.
+Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orientação a objetos e separação de responsabilidades.
 
-atualização: Adição de serviços, Lista e reformulação do main.
+##Funcionalidades
+
+- Cadastro de clientes
+- Criação de pedidos vinculados a clientes
+- Adição de itens ao pedido
+- Cálculo automático do valor total do pedido
+- Registro de data e status do pedido
+- Busca de cliente por CPF
+- Associação de pedidos ao cliente
+
+##Conceitos aplicados
+
+- Programação Orientada a Objetos (POO)
+- Separação em camadas (Entities e Services)
+- Enum para controle de status do pedido
+- Stream API para busca de dados
+- Manipulação de datas com LocalDate
+- Encapsulamento e organização de código
+
+##Estrutura do projeto
+
+- `entities` → classes principais (Cliente, Pedido, Produto, ItensPedido, StatusPedido)
+- `PedidoServicos` → regras de negócio e serviços
+- `Programa` → execução via console
+
+##Regras de negócio
+
+- Cada pedido pode conter vários itens
+- O valor total é calculado automaticamente
+- O pedido só é fechado após cálculo e definição de status
+- Cliente pode possuir múltiplos pedidos
+
+##Exemplo de status
+
+- PAGAMENTO_PENDENTE
+- PROCESSANDO
+- ENVIADO
+- ENTREGUE
+
+##Como executar
+
+1. Abrir o projeto no IntelliJ
+2. Rodar a classe `Programa`
