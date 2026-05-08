@@ -1,4 +1,4 @@
-package entities;
+package ENUM;
 
 public enum StatusPedido {
     PAGAMENTO_PENDENTE,

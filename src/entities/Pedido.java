@@ -1,10 +1,9 @@
 package entities;
-import java.text.SimpleDateFormat;
+import ENUM.StatusPedido;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Pedido{
@@ -54,6 +53,13 @@ public class Pedido{
 
     public void setPrecoPedido(double precoPedido) {
         this.precoPedido = precoPedido;
+    }
+
+    public void finalizarPedido(){
+        if (itensPedidos.isEmpty()){
+            System.out.println("pedido vazio");
+        }
+        this.status = StatusPedido.FINALIZADO;
     }
 
     @Override

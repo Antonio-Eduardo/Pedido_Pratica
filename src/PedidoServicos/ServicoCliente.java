@@ -1,5 +1,6 @@
 package PedidoServicos;
 
+import ENUM.StatusPedido;
 import entities.Cliente;
 import entities.Pedido;
 

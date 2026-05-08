@@ -1,3 +1,4 @@
+import CaixaServico.CaixaPadrao;
 import Excecoes.EntradasExceptions;
 import PedidoServicos.ServicoCalculo;
 import PedidoServicos.ServicoCliente;
@@ -24,8 +25,7 @@ public class Programa {
         ServicoProduto servicoProduto = new ServicoProduto();
         int resposta = 0;
         while (resposta != 2) {
-            resposta = EntradasExceptions.lerInteiros(sc, "Deseja registrar um cliente? [1-SIM|2-NAO]");
-            sc.nextLine();
+            resposta = EntradasExceptions.lerInteiros(sc, "Deseja registrar um cliente? [1-SIM|2-NAO]\n");
             switch (resposta) {
                 case 1:
 
@@ -49,7 +49,7 @@ public class Programa {
             sc.close();
             return;
         }
-        int resposta2 = EntradasExceptions.lerInteiros(sc, "Deseja iniciar o seu pedido? [1-SIM|2-NAO]");
+        int resposta2 = EntradasExceptions.lerInteiros(sc, "Deseja iniciar o seu pedido? [1-SIM|2-NAO]\n");
         if (resposta2 != 1) {
             System.out.println("Programa encerrado!");
             sc.close();
@@ -70,8 +70,7 @@ public class Programa {
         int resposta3 = 0;
 
         while (resposta3 != 3) {
-            resposta3 = EntradasExceptions.lerInteiros(sc, "[1-ADICIONAR ITENS|2-FECHAR O PEDIDO|3-SAIR");
-            sc.nextLine();
+            resposta3 = EntradasExceptions.lerInteiros(sc, "[1-ADICIONAR ITENS|2-FECHAR O PEDIDO|3-SAIR\n");
             switch (resposta3) {
                 case 1:
                     String produto = EntradasExceptions.lerString(sc, "Nome do produto: ");
@@ -87,7 +86,7 @@ public class Programa {
 
                 case 2:
                     servicoPedido.fecharPedido(pedido);
-                    System.out.print("Pedido finalizado!");
+                    System.out.println("Pedido finalizado!");
                     System.out.print(pedido);
                     servicoCliente.associarCliente(clienteBusca, pedido);
                     break;
@@ -99,6 +98,18 @@ public class Programa {
                 default:
                     System.out.print("Opcao invalida!");
             }
+        }
+        int caixa = EntradasExceptions.lerInteiros(sc,"Qual caixa deseja usar? [1-CAIXA | 2-CAIXA RAPIDO]\n");
+        switch (caixa){
+            case 1:
+                CaixaPadrao caixaP = new CaixaPadrao();
+                cpf = EntradasExceptions.lerString(sc,"Identifique o cliente pelo [CPF]: ");
+                clienteBusca =servicoCliente.buscarCliente(clientes,cpf);
+                if (clienteBusca == null){
+                    System.out.println("Cliente nao encontrado");
+                    return;
+                }
+                caixaP.processarPedido(servicoPedido.getPedidos(clienteBusca));
         }
         System.out.println(clienteBusca);
         System.out.println(pedido);
