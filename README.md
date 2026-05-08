@@ -24,8 +24,10 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Estrutura do projeto
 
 - `entities` → classes principais (Cliente, Pedido, Produto, ItensPedido, StatusPedido)
-- `PedidoServicos` → regras de negócio e serviços
+- `PedidoServicos` → Todo tipo de serviço, desde de serviço para cliente, calculos, pedidos, produtos...
 - `Programa` → execução via console
+- `CaixaServico` → Interface caixa para implementação de caixas, desde caixa normal, caixa rapido, etc
+- `Excecoes` → Qualquer tipo de exceções, sejam exceções de entrada "EntradaExceptions" ou exceções personalizadas de regra do negocio
 
 ##Regras de negócio
 
@@ -33,13 +35,18 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 - O valor total é calculado automaticamente
 - O pedido só é fechado após cálculo e definição de status
 - Cliente pode possuir múltiplos pedidos
+- Enum usado como identificador para qualquer ação que fuja da regra do negocio.
+- Caixa rapido tem um limite de itens até 15 itens.
 
 ##Exemplo de status
 
 - PAGAMENTO_PENDENTE
 - PROCESSANDO
-- ENVIADO
-- ENTREGUE
+-  FINALIZADO
+
+##Exemplo do Enum RegraServico
+
+- CAIXA_LIMITE_EXCEDIDO
 
 ##Como executar
 

@@ -1,4 +1,5 @@
 import CaixaServico.CaixaPadrao;
+import CaixaServico.CaixaRapido;
 import Excecoes.EntradasExceptions;
 import PedidoServicos.ServicoCalculo;
 import PedidoServicos.ServicoCliente;
@@ -110,6 +111,15 @@ public class Programa {
                     return;
                 }
                 caixaP.processarPedido(servicoPedido.getPedidos(clienteBusca));
+            case 2:
+                CaixaRapido caixaR = new CaixaRapido();
+                cpf = EntradasExceptions.lerString(sc,"Identifique o cliente pelo [CPF]: ");
+                clienteBusca =servicoCliente.buscarCliente(clientes,cpf);
+                if (clienteBusca == null){
+                    System.out.println("Cliente nao encontrado");
+                    return;
+                }
+                caixaR.processarPedido(servicoPedido.getPedidos(clienteBusca));
         }
         System.out.println(clienteBusca);
         System.out.println(pedido);
