@@ -53,13 +53,6 @@ public class Programa {
         String cpf = EntradasExceptions.lerString(sc, "Digite o CPF da conta que voce deseja abrir o pedido: ");
 
         Cliente clienteBusca = servicoCliente.buscarCliente(clientes, cpf);
-
-        if (clienteBusca == null) {
-            System.out.print("Cliente com CPF " + cpf + " nao encontrado!");
-            System.out.print("Encerrando programa...");
-            sc.close();
-            return;
-        }
         ServicoPedido servicoPedido = new ServicoPedido();
         Pedido pedido = servicoPedido.criarPedido();
         int resposta3 = 0;
@@ -100,19 +93,11 @@ public class Programa {
                 CaixaPadrao caixaP = new CaixaPadrao();
                 cpf = EntradasExceptions.lerString(sc,"Identifique o cliente pelo [CPF]: ");
                 clienteBusca =servicoCliente.buscarCliente(clientes,cpf);
-                if (clienteBusca == null){
-                    System.out.println("Cliente nao encontrado");
-                    return;
-                }
                 caixaP.processarPedido(servicoPedido.getPedidos(clienteBusca));
             case 2:
                 CaixaRapido caixaR = new CaixaRapido();
                 cpf = EntradasExceptions.lerString(sc,"Identifique o cliente pelo [CPF]: ");
                 clienteBusca =servicoCliente.buscarCliente(clientes,cpf);
-                if (clienteBusca == null){
-                    System.out.println("Cliente nao encontrado");
-                    return;
-                }
                 caixaR.processarPedido(servicoPedido.getPedidos(clienteBusca));
         }
         System.out.println(clienteBusca);
