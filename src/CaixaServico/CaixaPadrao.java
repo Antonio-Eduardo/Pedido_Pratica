@@ -1,7 +1,6 @@
 package CaixaServico;
 
 import ENUM.StatusPedido;
-import entities.Cliente;
 import entities.Pedido;
 
 public class CaixaPadrao implements Caixa{

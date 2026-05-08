@@ -1,19 +1,13 @@
 import CaixaServico.CaixaPadrao;
 import CaixaServico.CaixaRapido;
 import Excecoes.EntradasExceptions;
-import PedidoServicos.ServicoCalculo;
 import PedidoServicos.ServicoCliente;
 import PedidoServicos.ServicoPedido;
 import PedidoServicos.ServicoProduto;
 import entities.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 

@@ -4,7 +4,6 @@ import entities.Cliente;
 import entities.ItensPedido;
 import entities.Pedido;
 import ENUM.StatusPedido;
-
 import java.time.LocalDate;
 
 public class ServicoPedido {

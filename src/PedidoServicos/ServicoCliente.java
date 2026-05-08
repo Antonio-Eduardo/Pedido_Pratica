@@ -1,9 +1,7 @@
 package PedidoServicos;
 
-import ENUM.StatusPedido;
 import entities.Cliente;
 import entities.Pedido;
-
 import java.time.LocalDate;
 import java.util.List;
 
