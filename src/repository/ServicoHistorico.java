@@ -1,22 +1,20 @@
 package repository;
 
-import Services.PersistenciaDdados;
+import Services.PersistenciaDados;
 import entities.Cliente;
-import entities.Pedido;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ServicoHistorico implements PersistenciaDdados {
+public class ServicoHistorico implements PersistenciaDados<Cliente> {
     private static final String FILE = "clientes.txt";
     DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     @Override
-    public List<Cliente> listar(Cliente cliente) {
+    public List<Cliente> listar() {
         List<Cliente> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE))) {
             String linha;
