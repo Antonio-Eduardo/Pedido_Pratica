@@ -10,6 +10,8 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 - Cálculo automático do valor total do pedido
 - Registro de data e status do pedido
 - Busca de cliente por CPF
+- Busca de pedido por id do pedido gerado por UUID
+- Arquivar todo cliente com seus dados a partir do momento que ele é gerado
 - Associação de pedidos ao cliente
 
 ##Conceitos aplicados
@@ -20,6 +22,7 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 - Stream API para busca de dados
 - Manipulação de datas com LocalDate
 - Encapsulamento e organização de código
+- Uso de generics pra aumentar a flexibilidade da minha interface de dados
 
 ##Estrutura do projeto
 
