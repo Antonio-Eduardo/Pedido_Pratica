@@ -1,9 +1,10 @@
-package CaixaServico;
+package Services.implement;
 
 import Excecoes.CaixaLimiteExcedido;
+import Services.Caixa;
 import entities.Pedido;
 
-public class CaixaRapido implements Caixa{
+public class ServicoCaixaRapido implements Caixa {
     @Override
     public void processarPedido(Pedido pedido) {
         if (pedido.getItensPedidos().size() > 15){

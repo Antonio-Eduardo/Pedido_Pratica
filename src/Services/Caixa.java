@@ -1,4 +1,4 @@
-package CaixaServico;
+package Services;
 
 import entities.Pedido;
 

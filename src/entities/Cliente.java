@@ -74,7 +74,9 @@ public class Cliente {
         sb.append("\nDataDeNascimento = ").append(fmt.format(DataDeNascimento)).append("\n");
         sb.append("\nEmail = ").append(email);
         sb.append("\nCPF= ").append(cpf);
-
+        for (Pedido x : pedidos){
+            sb.append(x).append("\n");
+        }
         return sb.toString();
     }
 }

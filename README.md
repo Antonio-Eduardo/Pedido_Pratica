@@ -24,8 +24,8 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Estrutura do projeto
 
 - `entities` → classes principais (Cliente, Pedido, Produto, ItensPedido, StatusPedido)
-- `PedidoServicos` → Todo tipo de serviço, desde de serviço para cliente, calculos, pedidos, produtos...
-- `Programa` → execução via console
+- `Services` → Todo tipo de serviço, desde de serviço para cliente, calculos, pedidos, produtos...
+- `Main.Programa` → execução via console
 - `CaixaServico` → Interface caixa para implementação de caixas, desde caixa normal, caixa rapido, etc
 - `Excecoes` → Qualquer tipo de exceções, sejam exceções de entrada "EntradaExceptions" ou exceções personalizadas de regra do negocio
 
@@ -51,4 +51,4 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Como executar
 
 1. Abrir o projeto no IntelliJ
-2. Rodar a classe `Programa`
+2. Rodar a classe `Main.Programa`

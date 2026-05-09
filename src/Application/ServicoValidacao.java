@@ -1,9 +1,10 @@
-package Excecoes;
+package Application;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.UUID;
 
-public class EntradasExceptions {
+public class ServicoValidacao {
     public static int lerInteiros(Scanner sc, String texto) {
         while (true) {
             try {

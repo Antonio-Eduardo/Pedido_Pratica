@@ -1,4 +1,4 @@
-package PedidoServicos;
+package Application;
 
 import entities.Cliente;
 import entities.Pedido;
@@ -12,17 +12,16 @@ public class ServicoCliente {
     }
 
     public Cliente buscarCliente(List<Cliente> clientes, String cpf) {
-        while (true) {
-            Cliente z = clientes.stream().filter(c -> c.getCpf().equals(cpf)).findFirst().orElse(null);
-            if (z == null) {
-                System.out.println("CPF nao existe");
-            }else {
-                return z;
-            }
+        Cliente z = clientes.stream().filter(c -> c.getCpf().equals(cpf)).findFirst().orElse(null);
+        if (z == null) {
+            System.out.println("CPF nao existe");
         }
+        return z;
     }
+
 
     public void associarCliente(Cliente cliente, Pedido pedido) {
         cliente.addPedido(pedido);
     }
+
 }

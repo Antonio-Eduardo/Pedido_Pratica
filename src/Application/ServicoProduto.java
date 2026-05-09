@@ -1,4 +1,4 @@
-package PedidoServicos;
+package Application;
 
 import entities.Produto;
 import java.util.HashMap;

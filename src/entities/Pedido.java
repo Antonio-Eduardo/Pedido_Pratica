@@ -2,21 +2,28 @@ package entities;
 
 import ENUM.StatusPedido;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Pedido{
-    private LocalDate momentoDaCompra;
+    private Cliente cliente;
+    private UUID idPedido;
+    private String cpf;
+    private LocalDateTime momentoDaCompra;
     private StatusPedido status;
     private double precoPedido;
     private List<ItensPedido> itensPedidos = new ArrayList<>();
 
     public Pedido(){}
 
-    public Pedido(LocalDate momentoDaCompra, StatusPedido status) {
-        this.momentoDaCompra = momentoDaCompra;
-        this.status = status;
+    public Pedido(Cliente cliente) {
+        this.idPedido = UUID.randomUUID();
+        this.status = StatusPedido.PROCESSANDO;
+        this.cliente = cliente;
+        this.cpf = cliente.getCpf();
     }
     public void addItem(ItensPedido item){
         itensPedidos.add(item);
@@ -24,11 +31,11 @@ public class Pedido{
     public void removeItem(ItensPedido item){
         itensPedidos.remove(item);
     }
-    public LocalDate getMomentoDaCompra() {
+    public LocalDateTime getMomentoDaCompra() {
         return momentoDaCompra;
     }
 
-    public void setMomentoDaCompra(LocalDate momentoDaCompra) {
+    public void setMomentoDaCompra(LocalDateTime momentoDaCompra) {
         this.momentoDaCompra = momentoDaCompra;
     }
     public StatusPedido getStatus() {
@@ -55,6 +62,10 @@ public class Pedido{
         this.precoPedido = precoPedido;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     public void finalizarPedido(){
         if (itensPedidos.isEmpty()){
             System.out.println("pedido vazio");
@@ -62,9 +73,29 @@ public class Pedido{
         this.status = StatusPedido.FINALIZADO;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public UUID getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(UUID idPedido) {
+        this.idPedido = idPedido;
+    }
+
     @Override
     public String toString() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n--- RESUMO DO PEDIDO ---\n");

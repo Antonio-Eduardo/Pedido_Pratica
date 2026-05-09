@@ -1,9 +1,10 @@
-package CaixaServico;
+package Services.implement;
 
 import ENUM.StatusPedido;
+import Services.Caixa;
 import entities.Pedido;
 
-public class CaixaPadrao implements Caixa{
+public class ServicoCaixaDefault implements Caixa {
     @Override
     public void processarPedido(Pedido pedido) {
         double total = pedido.getPrecoPedido();
