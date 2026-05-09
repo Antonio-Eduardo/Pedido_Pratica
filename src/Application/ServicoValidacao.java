@@ -1,5 +1,8 @@
 package Application;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
@@ -37,6 +40,19 @@ public class ServicoValidacao {
                 return insert;
             }catch (InputMismatchException e){
                 System.out.print("Error texto: " +e);
+            }
+        }
+    }
+    public static LocalDate lerData(Scanner sc, String texto){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        while (true){
+            try {
+                System.out.println(texto);
+                String dataT = sc.nextLine();
+                LocalDate data = LocalDate.parse(dataT, fmt);
+                return data;
+            } catch (DateTimeParseException e) {
+                System.out.println("erro: " + e);
             }
         }
     }

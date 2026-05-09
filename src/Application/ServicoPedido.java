@@ -32,6 +32,13 @@ public class ServicoPedido {
         }
         return c;
     }
+    public Pedido criarPedido(Cliente cliente){
+        Pedido pedido = new Pedido();
+        pedido.setIdPedido(UUID.randomUUID());
+        System.out.println("Codigo do pedido: " + pedido.getIdPedido());
+        cliente.getPedidos().add(pedido);
+        return pedido;
+    }
 
     public Pedido buscarPedido(List<Pedido> pedidos, UUID codigo) {
         Pedido z = pedidos.stream().filter(c -> c.getIdPedido().equals(codigo)).findFirst().orElse(null);

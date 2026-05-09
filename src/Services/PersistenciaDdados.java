@@ -6,6 +6,6 @@ import entities.Pedido;
 import java.util.List;
 
 public interface PersistenciaDdados {
-    public void salvar(Pedido pedido);
-    List<Pedido> listar(Cliente cliente);
+    public void salvar(Cliente cliente);
+    List<Cliente> listar(Cliente cliente);
 }

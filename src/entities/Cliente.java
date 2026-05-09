@@ -1,23 +1,32 @@
 package entities;
 
+import repository.ServicoHistorico;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente> {
     private String nome;
     private String email;
     private LocalDate DataDeNascimento;
     private String cpf;
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public Cliente(){}
-    public Cliente(String nome, String email, LocalDate dataDeNascimento, String cpf){
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String email, LocalDate dataDeNascimento, String cpf) {
         this.nome = nome;
         this.email = email;
         this.DataDeNascimento = dataDeNascimento;
         this.cpf = cpf;
+    }
+
+    @Override
+    public int compareTo(Cliente o) {
+        return this.nome.compareTo(o.nome);
     }
 
     public LocalDate getDataDeNascimento() {
@@ -51,10 +60,12 @@ public class Cliente {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public void addPedido(Pedido pedido){
+
+    public void addPedido(Pedido pedido) {
         pedidos.add(pedido);
     }
-    public void removePedido(Pedido pedido){
+
+    public void removePedido(Pedido pedido) {
         pedidos.remove(pedido);
     }
 
@@ -74,7 +85,7 @@ public class Cliente {
         sb.append("\nDataDeNascimento = ").append(fmt.format(DataDeNascimento)).append("\n");
         sb.append("\nEmail = ").append(email);
         sb.append("\nCPF= ").append(cpf);
-        for (Pedido x : pedidos){
+        for (Pedido x : pedidos) {
             sb.append(x).append("\n");
         }
         return sb.toString();

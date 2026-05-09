@@ -20,7 +20,6 @@ public class Pedido{
     public Pedido(){}
 
     public Pedido(Cliente cliente) {
-        this.idPedido = UUID.randomUUID();
         this.status = StatusPedido.PROCESSANDO;
         this.cliente = cliente;
         this.cpf = cliente.getCpf();

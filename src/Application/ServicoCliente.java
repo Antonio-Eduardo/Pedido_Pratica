@@ -2,13 +2,19 @@ package Application;
 
 import entities.Cliente;
 import entities.Pedido;
+import repository.ServicoHistorico;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ServicoCliente {
+    ServicoHistorico servicoHistorico = new ServicoHistorico();
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public Cliente registrarCliente(String nome, String email, LocalDate dataDeNascimento, String cpf) {
-        return new Cliente(nome, email, dataDeNascimento, cpf);
+        Cliente c = new Cliente(nome, email, dataDeNascimento, cpf);
+        servicoHistorico.salvar(c);
+        return c;
     }
 
     public Cliente buscarCliente(List<Cliente> clientes, String cpf) {
