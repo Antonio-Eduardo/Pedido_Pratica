@@ -18,10 +18,15 @@ public class ServicoPedido {
     public void adicionarItem(Pedido pedido, ItensPedido item) {
         pedido.addItem(item);
     }
+    private final ServicoCalculo calculo = new ServicoCalculo();
 
-    public void fecharPedido(Cliente cliente) {
-        ServicoCalculo calculo = new ServicoCalculo();
-        calculo.calculoPedido(cliente);
+    public void fecharPedido(UUID id,Cliente cliente) {
+        Pedido p = buscarPedido(cliente.getPedidos(),id);
+        double total =calculo.calcularPedido(p);
+        p.setMomentoDaCompra(LocalDateTime.now());
+        p.setStatus(StatusPedido.PAGAMENTO_PENDENTE);
+        p.setPrecoPedido(total);
+
     }
 
     public Pedido getPedidos(Cliente cliente) {

@@ -33,7 +33,8 @@ public class Programa {
                     clientes.add(cliente);
                     break;
                 case 2:
-                    System.out.print("\nSaindo do cadastro...");
+                    clientes.sort(Comparator.comparing(Cliente::getNome));
+                    System.out.print("\nSaindo do cadastro...\n");
                     break;
                 default:
                     System.out.print("Escolha invalida!");
@@ -75,23 +76,18 @@ public class Programa {
                             servicoCliente.associarCliente(clienteBusca, pedidoAtual);
                         servicoPedido.adicionarItem(pedidoAtual, item);
                         break;
-
-
                     case 2:
                         String idPedido = ServicoValidacao.lerString(sc, "Digite o codigo do produto: ");
                         UUID id = UUID.fromString(idPedido);
                         Pedido pedidoBusca = servicoPedido.buscarPedido(clienteBusca.getPedidos(), id);
-                        servicoPedido.fecharPedido(clienteBusca);
+                        servicoPedido.fecharPedido(id,clienteBusca);
                         System.out.println("Pedido finalizado!");
 
                         System.out.print(pedidoBusca);
-
                         break;
-
                     case 3:
                         System.out.println("Saindo...");
                         break;
-
                     default:
                         System.out.print("Opcao invalida!");
                 }
@@ -115,7 +111,6 @@ public class Programa {
                 caixaR.processarPedido(servicoPedido.getPedidos(clienteProcura));
                 break;
         }
-
     }
 }
 

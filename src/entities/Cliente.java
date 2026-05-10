@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente implements Comparable<Cliente> {
+public class Cliente  {
     private String nome;
     private String email;
     private LocalDate DataDeNascimento;
@@ -22,11 +22,6 @@ public class Cliente implements Comparable<Cliente> {
         this.email = email;
         this.DataDeNascimento = dataDeNascimento;
         this.cpf = cpf;
-    }
-
-    @Override
-    public int compareTo(Cliente o) {
-        return this.nome.compareTo(o.nome);
     }
 
     public LocalDate getDataDeNascimento() {
