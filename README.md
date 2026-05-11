@@ -54,7 +54,7 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 - CAIXA_LIMITE_EXCEDIDO
 
 ##Implementação do banco de dados usando SQL/MySQL com JDBC (EM ANDAMENTO)
--- adicionando classe de conexão JDBC e db.properties
+- adicionando classe de conexão JDBC e db.properties
 
 ##Como executar
 
