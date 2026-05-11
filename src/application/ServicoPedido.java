@@ -1,4 +1,4 @@
-package Application;
+package application;
 
 import entities.Cliente;
 import entities.ItensPedido;

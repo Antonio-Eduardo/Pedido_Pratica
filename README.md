@@ -17,7 +17,7 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Conceitos aplicados
 
 - Programação Orientada a Objetos (POO)
-- Separação em camadas (Entities e Services)
+- Separação em camadas (Entities e services)
 - Enum para controle de status do pedido
 - Stream API para busca de dados
 - Manipulação de datas com LocalDate
@@ -27,10 +27,10 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Estrutura do projeto
 
 - `entities` → classes principais (Cliente, Pedido, Produto, ItensPedido)
-- `Services` → Interfaces
+- `services` → Interfaces
 - `Implements`→ Serviços que implementam a interface
 - `Repository`→ Salvar dados
-- `Main.Programa` → execução via console
+- `Main.Main` → execução via console
 - `Excecoes` → Exceções a regra do negocio
 - `ENUM`→ estados fixos do sistema
 
@@ -56,4 +56,4 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Como executar
 
 1. Abrir o projeto no IntelliJ
-2. Rodar a classe `Main.Programa`
+2. Rodar a classe `Main.Main`

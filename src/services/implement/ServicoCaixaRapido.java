@@ -1,7 +1,7 @@
-package Services.implement;
+package services.implement;
 
 import Excecoes.CaixaLimiteExcedido;
-import Services.Caixa;
+import services.Caixa;
 import entities.Pedido;
 
 public class ServicoCaixaRapido implements Caixa {

@@ -1,18 +1,17 @@
 package Main;
 
-import Services.implement.ServicoCaixaDefault;
-import Services.implement.ServicoCaixaRapido;
-import Application.ServicoValidacao;
-import Application.ServicoCliente;
-import Application.ServicoPedido;
-import Application.ServicoProduto;
+import services.implement.ServicoCaixaDefault;
+import services.implement.ServicoCaixaRapido;
+import application.ServicoValidacao;
+import application.ServicoCliente;
+import application.ServicoPedido;
+import application.ServicoProduto;
 import entities.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Programa {
+public class Main {
     public static void main(String[] args) {
         List<Cliente> clientes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);

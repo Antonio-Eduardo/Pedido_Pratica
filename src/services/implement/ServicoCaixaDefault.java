@@ -1,7 +1,7 @@
-package Services.implement;
+package services.implement;
 
 import ENUM.StatusPedido;
-import Services.Caixa;
+import services.Caixa;
 import entities.Pedido;
 
 public class ServicoCaixaDefault implements Caixa {

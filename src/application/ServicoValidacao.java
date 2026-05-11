@@ -1,11 +1,10 @@
-package Application;
+package application;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class ServicoValidacao {
     public static int lerInteiros(Scanner sc, String texto) {
