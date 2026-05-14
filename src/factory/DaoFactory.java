@@ -1,5 +1,7 @@
-package dao;
+package factory;
 
+import dao.ClienteDAO;
+import dao.ProdutoDAO;
 import dao.impl.ClienteDaoImpl;
 import dao.impl.ProdutoDaoImpl;
 

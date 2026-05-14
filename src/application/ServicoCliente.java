@@ -1,27 +1,20 @@
 package application;
 
+import dao.ClienteDAO;
+import dao.ProdutoDAO;
 import entities.Cliente;
 import entities.Pedido;
-import repository.ServicoHistorico;
+import factory.DaoFactory;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class ServicoCliente {
-    ServicoHistorico servicoHistorico = new ServicoHistorico();
+    ClienteDAO clienteDAO = DaoFactory.criarClienteDao();
+
     public Cliente registrarCliente(String nome, String email, LocalDate dataDeNascimento, String cpf) {
         Cliente c = new Cliente(nome, email, dataDeNascimento, cpf);
-        servicoHistorico.salvar(c);
+        clienteDAO.salvar(c);
         return c;
     }
-    public Cliente buscarCliente(List<Cliente> clientes, String cpf) {
-        Cliente z = clientes.stream().filter(c -> c.getCpf().equals(cpf)).findFirst().orElse(null);
-        if (z == null) {
-            System.out.println("CPF nao existe");
-        }
-        return z;
-    }
-    public void associarCliente(Cliente cliente, Pedido pedido) {
-        cliente.addPedido(pedido);
-    }
-
 }
