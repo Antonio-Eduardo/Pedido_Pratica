@@ -1,16 +1,21 @@
 package entities;
 
 public class Produto {
-    private String iD;
+    private Long iD;
     private String nome;
     private double precoProduto;
 
     public Produto() {
     }
-    public Produto(String iD, String nome, double precoProduto) {
+    public Produto( String nome, double precoProduto) {
         this.nome = nome;
         this.precoProduto = precoProduto;
+    }
+
+    public Produto(Long iD, String nome, double precoProduto) {
         this.iD = iD;
+        this.nome = nome;
+        this.precoProduto = precoProduto;
     }
 
     public double getPreco() {
@@ -21,11 +26,11 @@ public class Produto {
         this.precoProduto = preco;
     }
 
-    public String getiD() {
+    public Long getiD() {
         return iD;
     }
 
-    public void setiD(String iD) {
+    public void setiD(Long iD) {
         this.iD = iD;
     }
 

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class ClienteDaoImpl implements ClienteDAO {
     @Override
-    public Cliente buscarPorId(Long id) {
+    public Cliente buscarContaPorId(Long id) {
         String sql = "SELECT * FROM cliente WHERE idCliente = ?";
         try(Connection conn = DB.getConnection();
         PreparedStatement st = conn.prepareStatement(sql)){
