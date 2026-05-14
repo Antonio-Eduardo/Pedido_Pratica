@@ -2,6 +2,7 @@ package entities;
 
 import enums.StatusPedido;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,34 +10,46 @@ import java.util.List;
 import java.util.UUID;
 
 public class Pedido{
-    private Cliente cliente;
-    private UUID idPedido;
-    private String cpf;
-    private LocalDateTime momentoDaCompra;
+    private Long idPedido;
     private StatusPedido status;
+    private Timestamp dataHora;
+    private Long idCliente;
     private double precoPedido;
     private List<ItensPedido> itensPedidos = new ArrayList<>();
 
     public Pedido(){}
 
-    public Pedido(Cliente cliente) {
-        this.status = StatusPedido.PROCESSANDO;
-        this.cliente = cliente;
-        this.cpf = cliente.getCpf();
+    public Pedido(Long idPedido, Long idCliente, double precoPedido, Timestamp dataHora, StatusPedido status) {
+        this.idPedido = idPedido;
+        this.idCliente = idCliente;
+        this.precoPedido = precoPedido;
+        this.dataHora = dataHora;
+        this.status = status;
     }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Timestamp getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(Timestamp dataHora) {
+        this.dataHora = dataHora;
+    }
+
     public void addItem(ItensPedido item){
         itensPedidos.add(item);
     }
     public void removeItem(ItensPedido item){
         itensPedidos.remove(item);
     }
-    public LocalDateTime getMomentoDaCompra() {
-        return momentoDaCompra;
-    }
 
-    public void setMomentoDaCompra(LocalDateTime momentoDaCompra) {
-        this.momentoDaCompra = momentoDaCompra;
-    }
     public StatusPedido getStatus() {
         return status;
     }
@@ -61,9 +74,7 @@ public class Pedido{
         this.precoPedido = precoPedido;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+
 
     public void finalizarPedido(){
         if (itensPedidos.isEmpty()){
@@ -72,23 +83,11 @@ public class Pedido{
         this.status = StatusPedido.FINALIZADO;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public UUID getIdPedido() {
+    public Long getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(UUID idPedido) {
+    public void setIdPedido(Long idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -98,8 +97,8 @@ public class Pedido{
         StringBuilder sb = new StringBuilder();
 
         sb.append("\n--- RESUMO DO PEDIDO ---\n");
-        if (momentoDaCompra != null) {
-            sb.append("Instante do Pedido: ").append(momentoDaCompra.format(fmt)).append("\n");
+        if (dataHora != null) {
+            sb.append("Instante do Pedido: ").append(dataHora).append("\n");
         } else {
             sb.append("SEM DATA");
         }
