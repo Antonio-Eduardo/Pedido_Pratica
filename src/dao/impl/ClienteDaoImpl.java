@@ -25,7 +25,6 @@ public class ClienteDaoImpl implements ClienteDAO {
                      return new Cliente(idDb,nome,email,dataDeNascimento,cpf);
                  }
              }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

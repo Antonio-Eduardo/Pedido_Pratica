@@ -10,20 +10,21 @@ import java.sql.*;
 
 public class PedidoDaoImpl implements PedidoDAO {
     @Override
-    public Pedido buscarPedidoPorId(Long id) {
-        String sql = "SELECT * FROM pedido WHERE idPedido = ?";
+    public Pedido buscarPedidoPorId(Long idPedido, Cliente cliente) {
+        String sql = "SELECT * FROM pedido WHERE idPedido = ? AND idCliente = ?";
         try(Connection conn = DB.getConnection();
         PreparedStatement st = conn.prepareStatement(sql)){
-            st.setLong(1,id);
+            st.setLong(1,idPedido);
+            st.setLong(2,cliente.getiD());
             try(ResultSet rs = st.executeQuery()){
                 if (rs.next()){
-                    Long idPedido = rs.getLong("idPedido");
+                    Long idPedidoDB = rs.getLong("idPedido");
                     Timestamp dataHora = rs.getTimestamp("dataHora");
                     double valor = rs.getDouble("valor");
-                    Long idCliente = rs.getLong("idCliente");
+                    Long idClienteDB = rs.getLong("idCliente");
                     StatusPedido status = StatusPedido.valueOf(rs.getString("status"));
 
-                    return new Pedido(idPedido, idCliente,valor,dataHora,status);
+                    return new Pedido(idPedido, idClienteDB,valor,dataHora,status);
                 }
             }
         } catch (SQLException e) {
@@ -49,7 +50,6 @@ public class PedidoDaoImpl implements PedidoDAO {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public void deletarPedidoPorId(Long id) {
         String sql = "DELETE FROM pedido WHERE idPedido = ?";

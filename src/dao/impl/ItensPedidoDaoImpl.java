@@ -5,6 +5,7 @@ import db.DB;
 import entities.ItensPedido;
 import entities.Pedido;
 import entities.Produto;
+import factory.DaoFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -55,7 +56,6 @@ public class ItensPedidoDaoImpl implements ItensPedidoDAO {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public void deleteItem(Long id) {
         String sql = "DELETE FROM itens_pedidos WHERE idItens = ?";
