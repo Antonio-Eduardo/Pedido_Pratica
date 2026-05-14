@@ -1,6 +1,6 @@
 package entities;
 
-import ENUM.StatusPedido;
+import enums.StatusPedido;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

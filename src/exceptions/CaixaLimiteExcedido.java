@@ -1,6 +1,6 @@
-package Excecoes;
+package exceptions;
 
-import ENUM.RegraServico;
+import enums.RegraServico;
 
 public class CaixaLimiteExcedido extends ValidacaoServico {
     public CaixaLimiteExcedido() {

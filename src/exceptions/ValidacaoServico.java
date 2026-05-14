@@ -1,6 +1,6 @@
-package Excecoes;
+package exceptions;
 
-import ENUM.RegraServico;
+import enums.RegraServico;
 
 public class ValidacaoServico extends RuntimeException {
     RegraServico errorCode;

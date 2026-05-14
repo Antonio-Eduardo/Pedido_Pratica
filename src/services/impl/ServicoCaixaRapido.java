@@ -1,6 +1,6 @@
-package services.implement;
+package services.impl;
 
-import Excecoes.CaixaLimiteExcedido;
+import exceptions.CaixaLimiteExcedido;
 import services.Caixa;
 import entities.Pedido;
 

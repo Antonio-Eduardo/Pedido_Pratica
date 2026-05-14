@@ -1,7 +1,7 @@
-package Main;
+package main;
 
-import services.implement.ServicoCaixaDefault;
-import services.implement.ServicoCaixaRapido;
+import services.impl.ServicoCaixaDefault;
+import services.impl.ServicoCaixaRapido;
 import application.ServicoValidacao;
 import application.ServicoCliente;
 import application.ServicoPedido;

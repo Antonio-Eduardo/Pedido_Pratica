@@ -30,9 +30,9 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 - `services` → Interfaces
 - `Implements`→ Serviços que implementam a interface
 - `Repository`→ Salvar dados
-- `Main.Main` → execução via console
-- `Excecoes` → Exceções a regra do negocio
-- `ENUM`→ estados fixos do sistema
+- `main.main` → execução via console
+- `exceptions` → Exceções a regra do negocio
+- `enums`→ estados fixos do sistema
 
 ##Regras de negócio
 
@@ -59,4 +59,4 @@ Projeto desenvolvido em Java para simular um sistema de pedidos com foco em orie
 ##Como executar
 
 1. Abrir o projeto no IntelliJ
-2. Rodar a classe `Main.Main`
+2. Rodar a classe `main.main`
