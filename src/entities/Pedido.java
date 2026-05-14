@@ -34,6 +34,11 @@ public class Pedido{
         this.status = status;
     }
 
+    public Pedido(Long idCliente, StatusPedido status) {
+        this.idCliente = idCliente;
+        this.status = status;
+    }
+
     public Long getIdCliente() {
         return idCliente;
     }

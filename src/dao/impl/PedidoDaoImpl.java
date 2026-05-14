@@ -34,12 +34,11 @@ public class PedidoDaoImpl implements PedidoDAO {
     }
     @Override
     public void salvar(Cliente c, Pedido p) {
-        String sql = "INSERT INTO pedido (valor,idCliente,status) VALUES (?,?,?)";
+        String sql = "INSERT INTO pedido (idCliente,status) VALUES (?,?)";
         try(Connection conn = DB.getConnection();
             PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            st.setDouble(1,p.getPrecoPedido());
-            st.setLong(2,c.getiD());
-            st.setString(3,p.getStatus().name());
+            st.setLong(1,c.getiD());
+            st.setString(2,p.getStatus().name());
            int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0){
                 try(ResultSet rsGenerated = st.getGeneratedKeys()){
@@ -56,6 +55,21 @@ public class PedidoDaoImpl implements PedidoDAO {
         try(Connection conn = DB.getConnection();
         PreparedStatement st = conn.prepareStatement(sql)){
             st.setLong(1,id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updatePedido(Pedido pedido) {
+        String sql = "UPDATE pedido SET valor = ?,status = ? WHERE idPedido = ?";
+        try(Connection conn = DB.getConnection();
+        PreparedStatement st = conn.prepareStatement(sql)){
+            st.setDouble(1,pedido.getPrecoPedido());
+            st.setString(2,pedido.getStatus().name());
+            st.setLong(3,pedido.getIdPedido());
+
             st.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

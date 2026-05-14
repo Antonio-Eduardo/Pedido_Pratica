@@ -24,12 +24,13 @@ public class ServicoPedido {
         double total =calculo.calcularPedido(p);
         p.setStatus(StatusPedido.PAGAMENTO_PENDENTE);
         p.setPrecoPedido(total);
-        pedidoDAO.salvar(cliente,p);
-
+        pedidoDAO.updatePedido(p);
     }
     public Pedido criarPedido(Cliente cliente){
-        Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido(cliente.getiD(),StatusPedido.PROCESSANDO);
         cliente.getPedidos().add(pedido);
+        pedidoDAO.salvar(cliente,pedido);
+        System.out.println("iD do pedido: " + pedido.getIdPedido());
         return pedido;
     }
 }
