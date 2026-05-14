@@ -18,9 +18,7 @@ public class ProdutoDaoImpl implements ProdutoDAO {
                     Long idDB = rs.getLong("idProduto");
                     String nome = rs.getString("nome");
                     double preco = rs.getDouble("preco");
-
                     return new Produto(idDB, nome, preco);
-
                 }
             }
         } catch (SQLException e) {
