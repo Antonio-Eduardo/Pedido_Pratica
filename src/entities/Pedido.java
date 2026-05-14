@@ -27,6 +27,13 @@ public class Pedido{
         this.status = status;
     }
 
+    public Pedido(Long idCliente, double precoPedido, Timestamp dataHora, StatusPedido status) {
+        this.idCliente = idCliente;
+        this.precoPedido = precoPedido;
+        this.dataHora = dataHora;
+        this.status = status;
+    }
+
     public Long getIdCliente() {
         return idCliente;
     }
