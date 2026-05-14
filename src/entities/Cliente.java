@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente  {
+    private Long iD;
     private String nome;
     private String email;
     private LocalDate DataDeNascimento;
@@ -22,6 +23,22 @@ public class Cliente  {
         this.email = email;
         this.DataDeNascimento = dataDeNascimento;
         this.cpf = cpf;
+    }
+
+    public Cliente(Long iD, String nome, String email, LocalDate dataDeNascimento, String cpf) {
+        this.iD = iD;
+        this.nome = nome;
+        this.email = email;
+        DataDeNascimento = dataDeNascimento;
+        this.cpf = cpf;
+    }
+
+    public Long getiD() {
+        return iD;
+    }
+
+    public void setiD(Long iD) {
+        this.iD = iD;
     }
 
     public LocalDate getDataDeNascimento() {
