@@ -1,11 +1,13 @@
 package main;
 
+import application.*;
+import dao.ClienteDAO;
+import dao.ItensPedidoDAO;
+import dao.PedidoDAO;
+import dao.ProdutoDAO;
+import factory.DaoFactory;
 import services.impl.ServicoCaixaDefault;
 import services.impl.ServicoCaixaRapido;
-import application.ServicoValidacao;
-import application.ServicoCliente;
-import application.ServicoPedido;
-import application.ServicoProduto;
 import entities.*;
 
 import java.time.LocalDate;
@@ -13,56 +15,73 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        List<Cliente> clientes = new ArrayList<>();
+
         Scanner sc = new Scanner(System.in);
         ServicoCliente servicoCliente = new ServicoCliente();
         ServicoProduto servicoProduto = new ServicoProduto();
         ServicoPedido servicoPedido = new ServicoPedido();
-        int resposta = 0;
-        while (resposta != 2) {
-            resposta = ServicoValidacao.lerInteiros(sc, "Deseja registrar um cliente? [1-SIM|2-NAO]\n");
-            switch (resposta) {
-                case 1:
+        ServiceItemPedido serviceItemPedido = new ServiceItemPedido();
 
+        ClienteDAO clienteDAO = DaoFactory.criarClienteDao();
+        PedidoDAO pedidoDAO = DaoFactory.criarPedidoDao();
+        ProdutoDAO produtoDAO = DaoFactory.criarProdutoDao();
+
+        int criandoCliente = 0;
+        while (criandoCliente != 2) {
+            criandoCliente = ServicoValidacao.lerInteiros(sc, "[1]-Registrar Cliente|[2]-Cliente ja registrado\n");
+            switch (criandoCliente) {
+                case 1:
                     String nome = ServicoValidacao.lerString(sc, "Nome do cliente: ");
                     String cpf = ServicoValidacao.lerString(sc, "Digite o cpf do cliente: ");
                     String email = ServicoValidacao.lerString(sc, "E-mail do cliente: ");
                     LocalDate dataNasc = ServicoValidacao.lerData(sc,"Data de nascimento do cliente: ");
-                    Cliente cliente = servicoCliente.registrarCliente(nome, email, dataNasc, cpf);
-                    clientes.add(cliente);
+                    Cliente novoCliente  = servicoCliente.registrarCliente(nome, email, dataNasc, cpf);
+                    System.out.println("iD do cliente: " + novoCliente.getiD());
                     break;
                 case 2:
-                    clientes.sort(Comparator.comparing(Cliente::getNome));
                     System.out.print("\nSaindo do cadastro...\n");
                     break;
                 default:
                     System.out.print("Escolha invalida!");
             }
         }
-        if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado, encerrando o programa");
-            sc.close();
-            return;
+        int criandoPedido = 0;
+        while (criandoPedido != 2) {
+            criandoPedido = ServicoValidacao.lerInteiros(sc, "[1]-Registrar Produto|[2]-Seguir para pedido\n");
+            switch (criandoPedido) {
+                case 1:
+                    String produto = ServicoValidacao.lerString(sc, "Nome do produto: ");
+                    double precoProduto = ServicoValidacao.lerDouble(sc, "Preco do produto: ");
+                    Produto prod = servicoProduto.criarProduto(produto, precoProduto);
+                    break;
+                case 2:
+                    System.out.print("\nSaindo...\n");
+                    break;
+                default:
+                    System.out.print("Escolha invalida!");
+            }
         }
-        int resposta2 = ServicoValidacao.lerInteiros(sc, "Deseja iniciar o seu pedido? [1-SIM|2-NAO]\n");
-        if (resposta2 != 1) {
-            System.out.println("Programa encerrado!");
-            sc.close();
-            return;
-        }
-        int resposta3 = 0;
-        int resposta4 = 0;
-        while (resposta4 != 3) {
-            resposta4 = ServicoValidacao.lerInteiros(sc,"[1-PROSSEGUIR COM PEDIDO|2-FINALIZAR OPERACAO\n");
-            if (resposta4 != 1 && resposta4 != 2){System.out.println("Entrada invalida");}
+        while (true) {
+            int resposta4 = ServicoValidacao.lerInteiros(sc,"[1-PROSSEGUIR COM PEDIDO|2-FINALIZAR OPERACAO\n");
+
+            if (resposta4 != 1 && resposta4 != 2){System.out.println("Entrada invalida"); continue;}
+
             if (resposta4 == 2){break;}
-            String cpf = ServicoValidacao.lerString(sc, "Digite o CPF da conta que voce deseja realizar a operacao: ");
-            Cliente clienteBusca = servicoCliente.buscarCliente(clientes, cpf);
+            List<Produto> produtos = produtoDAO.todosProdutos();
+            for (Produto p : produtos){
+                System.out.println("Nome: " + p.getNome()
+                + "\nPreco: " + p.getPreco());
+            }
+            Long idClient = ServicoValidacao.lerLong(sc, "Digite o iD da conta que voce deseja realizar a operacao: ");
+            Cliente clienteBusca = clienteDAO.buscarContaPorId(idClient);
             Pedido pedidoAtual = servicoPedido.criarPedido(clienteBusca);
-            resposta3=0;
-            while (resposta3 != 3) {
-                resposta3 = ServicoValidacao.lerInteiros(sc, "[1-ADICIONAR ITENS|2-FECHAR O PEDIDO|3-SAIR\n");
-                switch (resposta3) {
+            clienteBusca.addPedido(pedidoAtual);
+            System.out.println("Pedido criado: " + pedidoAtual.getIdPedido());
+
+            int iniciandoPedido=0;
+            while (iniciandoPedido != 3) {
+                iniciandoPedido = ServicoValidacao.lerInteiros(sc, "[1-ADICIONAR ITENS|2-FECHAR O PEDIDO|3-SAIR\n");
+                switch (iniciandoPedido) {
                     case 1:
                         String produto = ServicoValidacao.lerString(sc, "Nome do produto: ");
                         double precoProduto = ServicoValidacao.lerDouble(sc, "Preco do produto: ");
@@ -70,16 +89,13 @@ public class Main {
 
                         double precoVenda = ServicoValidacao.lerDouble(sc, "Preco de venda: ");
                         int quantidade = ServicoValidacao.lerInteiros(sc, "Quantidade desse produto: ");
-                        ItensPedido item = new ItensPedido(quantidade, precoVenda, prod);
-                            System.out.println("Pedido criado: " + pedidoAtual.getIdPedido());
-                            servicoCliente.associarCliente(clienteBusca, pedidoAtual);
+                        ItensPedido item = serviceItemPedido.criarItem(pedidoAtual,quantidade, precoVenda, prod);
                         servicoPedido.adicionarItem(pedidoAtual, item);
                         break;
                     case 2:
-                        String idPedido = ServicoValidacao.lerString(sc, "Digite o codigo do produto: ");
-                        UUID id = UUID.fromString(idPedido);
-                        Pedido pedidoBusca = servicoPedido.buscarPedido(clienteBusca.getPedidos(), id);
-                        servicoPedido.fecharPedido(id,clienteBusca);
+                        Long idPedido = ServicoValidacao.lerLong(sc, "Digite o iD do pedido: ");
+                        Pedido pedidoBusca = pedidoDAO.buscarPedidoPorId(idPedido,clienteBusca);
+                        servicoPedido.fecharPedido(idPedido,clienteBusca);
                         System.out.println("Pedido finalizado!");
 
                         System.out.print(pedidoBusca);
@@ -92,22 +108,22 @@ public class Main {
                 }
             }
         }
-        String cpf = ServicoValidacao.lerString(sc, "Identifique o cliente pelo [CPF]: ");
-        Cliente clienteProcura = servicoCliente.buscarCliente(clientes, cpf);
+        Long idClienteCaixa = ServicoValidacao.lerLong(sc, "Identifique o cliente pelo [iD]: ");
+        Cliente clienteCaixa = clienteDAO.buscarContaPorId(idClienteCaixa);
+        Long idPedidoCaixa = ServicoValidacao.lerLong(sc, "Identifique o pedido pelo [iD]: ");
+        Pedido pedidoBusca = pedidoDAO.buscarPedidoPorId(idPedidoCaixa,clienteCaixa);
 
-        int caixa = ServicoValidacao.lerInteiros(sc, "Qual caixa deseja usar? [1-CAIXA | 2-CAIXA RAPIDO]\n");
-        switch (caixa) {
+        int escolhaCaixa = ServicoValidacao.lerInteiros(sc, "Qual caixa deseja usar? [1-CAIXA | 2-CAIXA RAPIDO]\n");
+        switch (escolhaCaixa) {
             case 1:
                 ServicoCaixaDefault caixaP = new ServicoCaixaDefault();
-                cpf = ServicoValidacao.lerString(sc, "Identifique o cliente pelo [CPF]: ");
-                clienteProcura = servicoCliente.buscarCliente(clientes, cpf);
-                caixaP.processarPedido(servicoPedido.getPedidos(clienteProcura));
+
+                caixaP.processarPedido(pedidoBusca);
                 break;
             case 2:
                 ServicoCaixaRapido caixaR = new ServicoCaixaRapido();
-                cpf = ServicoValidacao.lerString(sc, "Identifique o cliente pelo [CPF]: ");
-                clienteProcura = servicoCliente.buscarCliente(clientes, cpf);
-                caixaR.processarPedido(servicoPedido.getPedidos(clienteProcura));
+
+                caixaR.processarPedido(pedidoBusca);
                 break;
         }
     }

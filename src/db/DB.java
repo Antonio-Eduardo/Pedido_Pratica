@@ -9,26 +9,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DB {
-    private static Connection conn = null;
-
     public static Connection getConnection(){
         try{
-        if (conn == null) {
             Properties props = loadProperties();
             String url = props.getProperty("dburl");
 
-            conn = DriverManager.getConnection(url, props);
-        }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return conn;
-    }
-    public static void closeConnection(){
-        try {
-            if (conn != null) {
-                conn.close();
-            }
+            return DriverManager.getConnection(url, props);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -5,6 +5,8 @@ import db.DB;
 import entities.Produto;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoDaoImpl implements ProdutoDAO {
     @Override
@@ -26,7 +28,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         }
         return null;
     }
-
     @Override
     public void salvar(Produto p) {
         String sql = "INSERT INTO produto (nome,preco) VALUES (?,?)";
@@ -49,7 +50,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
             throw new RuntimeException(e);
         }
     }
-
     @Override
     public void deletarProdutoPorId(Long id) {
         String sql = "DELETE FROM produto WHERE idProduto = ?";
@@ -61,5 +61,27 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Produto> todosProdutos() {
+        String sql = "SELECT * FROM produto";
+        List<Produto> produtos = new ArrayList<>();
+
+        try(Connection conn = DB.getConnection();
+        PreparedStatement st = conn.prepareStatement(sql)){
+            try(ResultSet rs = st.executeQuery()){
+                while (rs.next()) {
+                    Long idProduto = rs.getLong("idProduto");
+                    String nomeProduto = rs.getString("nome");
+                    double precoProduto = rs.getDouble("preco");
+                    Produto p = new Produto(idProduto, nomeProduto, precoProduto);
+                    produtos.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return produtos;
     }
 }

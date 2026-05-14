@@ -25,9 +25,11 @@ public class ServicoValidacao {
             try {
                 System.out.print(texto);
                 double numero = sc.nextDouble();
+                sc.nextLine();
                 return numero;
             }catch (InputMismatchException e){
                 System.out.print("Error double: " + e);
+                sc.nextLine();
             }
         }
     }
@@ -52,6 +54,19 @@ public class ServicoValidacao {
                 return data;
             } catch (DateTimeParseException e) {
                 System.out.println("erro: " + e);
+            }
+        }
+    }
+    public static Long lerLong(Scanner sc,String texto){
+        while (true){
+            try {
+                System.out.print(texto);
+                long numero = sc.nextLong();
+                sc.nextLine();
+                return numero;
+            }catch (InputMismatchException e){
+                System.out.print("Error Long: " + e);
+                sc.nextLine();
             }
         }
     }
