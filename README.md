@@ -98,7 +98,8 @@ Observações
 
 Fiz esse projeto para aprofundar meus conhecimentos em backend, focando em como o código Java lida com relacionamentos complexos no banco de dados.
 A principal evolução deste projeto em relação ao sistema bancário anterior foi a reconstrução de objetos complexos através de consultas SQL envolvendo múltiplos JOINs.
-Ainda existem melhorias futuras possíveis, como:
+
+## Ainda existem melhorias futuras possíveis, como:
 
 *Migração para Spring Boot
 *Uso de Spring Data JPA
