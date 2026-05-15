@@ -133,6 +133,31 @@ public class Main {
                 caixaR.processarPedido(pedidoBusca);
                 break;
         }
+        System.out.println("\n--- OPERAÇÃO FINALIZADA ---");
+        System.out.println("Gerando extrato consolidado via JOIN...");
+
+        Cliente clienteFinal = clienteDAO.ClientesPedidos(idClienteCaixa);
+
+        if (clienteFinal != null) {
+            System.out.println("\n========================================");
+            System.out.println("EXTRATO COMPLETO - CLIENTE: " + clienteFinal.getNome().toUpperCase());
+            System.out.println("E-MAIL: " + clienteFinal.getEmail());
+            System.out.println("========================================");
+
+            for (Pedido p : clienteFinal.getPedidos()) {
+                System.out.println("\n----------------------------------------");
+                System.out.printf("PEDIDO ID: %d | DATA: %s | STATUS: %s%n",
+                        p.getIdPedido(), p.getDataHora(), p.getStatus());
+                System.out.println("ITENS:");
+
+                for (ItensPedido item : p.getItensPedidos()) {
+                    System.out.printf("  - Qtd: %d | Preço Un: R$ %.2f | Subtotal: R$ %.2f%n",
+                            item.getQuantidade(), item.getPreco(), (item.getQuantidade() * item.getPreco()));
+                }
+                System.out.printf("TOTAL DO PEDIDO: R$ %.2f%n", p.getPrecoPedido());
+            }
+            System.out.println("========================================\n");
+        }
     }
 }
 

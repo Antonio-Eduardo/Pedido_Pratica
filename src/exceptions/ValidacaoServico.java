@@ -1,16 +1,16 @@
 package exceptions;
 
-import enums.RegraServico;
+import enums.ErrorCodes;
 
 public class ValidacaoServico extends RuntimeException {
-    RegraServico errorCode;
+    ErrorCodes errorCode;
 
-    public ValidacaoServico(RegraServico errorCode,String message) {
+    public ValidacaoServico(ErrorCodes errorCode, String message) {
         super(message);
         this.errorCode = errorCode;
     }
 
-    public RegraServico getErrorCode() {
+    public ErrorCodes getErrorCode() {
         return errorCode;
     }
 }

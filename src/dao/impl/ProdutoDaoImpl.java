@@ -3,6 +3,7 @@ package dao.impl;
 import dao.ProdutoDAO;
 import db.DB;
 import entities.Produto;
+import exceptions.DbException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ProdutoDaoImpl implements ProdutoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
         return null;
     }
@@ -47,7 +48,7 @@ public class ProdutoDaoImpl implements ProdutoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
     @Override
@@ -59,7 +60,7 @@ public class ProdutoDaoImpl implements ProdutoDAO {
 
             st.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
 

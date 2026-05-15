@@ -5,6 +5,7 @@ import db.DB;
 import entities.Cliente;
 import entities.Pedido;
 import enums.StatusPedido;
+import exceptions.DbException;
 
 import java.sql.*;
 
@@ -28,7 +29,7 @@ public class PedidoDaoImpl implements PedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
         return null;
     }
@@ -48,7 +49,7 @@ public class PedidoDaoImpl implements PedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
     @Override
@@ -59,7 +60,7 @@ public class PedidoDaoImpl implements PedidoDAO {
             st.setLong(1,id);
             st.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
 
@@ -74,7 +75,7 @@ public class PedidoDaoImpl implements PedidoDAO {
 
             st.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
 }

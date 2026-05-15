@@ -5,6 +5,7 @@ import db.DB;
 import entities.ItensPedido;
 import entities.Pedido;
 import entities.Produto;
+import exceptions.DbException;
 import factory.DaoFactory;
 
 import java.sql.*;
@@ -32,7 +33,7 @@ public class ItensPedidoDaoImpl implements ItensPedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
         return lista;
     }
@@ -55,7 +56,7 @@ public class ItensPedidoDaoImpl implements ItensPedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
     @Override
@@ -66,7 +67,7 @@ public class ItensPedidoDaoImpl implements ItensPedidoDAO {
             st.setLong(1,id);
             st.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DbException();
         }
     }
 }
