@@ -78,7 +78,8 @@ ITENS:
     Qtd: 1 | Preço Un: R$ 150.00 | Subtotal: R$ 150.00
 
 TOTAL DO PEDIDO: R$ 250.00
-Como rodar
+
+## Como rodar
 
     Clonar o repositório
     Configurar o banco de dados MySQL
