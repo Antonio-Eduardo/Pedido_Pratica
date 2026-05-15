@@ -30,7 +30,7 @@ public class ServicoPedido {
         Pedido pedido = new Pedido(cliente.getiD(),StatusPedido.PROCESSANDO);
         cliente.getPedidos().add(pedido);
         pedidoDAO.salvar(cliente,pedido);
-        System.out.println("iD do pedido: " + pedido.getIdPedido());
+        System.out.println("iD do pedido: [" + pedido.getIdPedido() + "]");
         return pedido;
     }
 }

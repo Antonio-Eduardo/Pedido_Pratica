@@ -39,7 +39,7 @@ public class Main {
                     System.out.println("iD do cliente: " + novoCliente.getiD());
                     break;
                 case 2:
-                    System.out.print("\nSaindo do cadastro...\n");
+                    System.out.print("Saindo do cadastro...\n");
                     break;
                 default:
                     System.out.print("Escolha invalida!");
@@ -55,7 +55,7 @@ public class Main {
                     Produto prod = servicoProduto.criarProduto(produto, precoProduto);
                     break;
                 case 2:
-                    System.out.print("\nSaindo...\n");
+                    System.out.print("Saindo...\n");
                     break;
                 default:
                     System.out.print("Escolha invalida!");
@@ -69,35 +69,42 @@ public class Main {
             if (resposta4 == 2){break;}
             List<Produto> produtos = produtoDAO.todosProdutos();
             for (Produto p : produtos){
-                System.out.println("Nome: " + p.getNome()
+                System.out.println("Nome: " + p.getNome() + "iD: " + p.getiD()
                 + "\nPreco: " + p.getPreco());
             }
             Long idClient = ServicoValidacao.lerLong(sc, "Digite o iD da conta que voce deseja realizar a operacao: ");
             Cliente clienteBusca = clienteDAO.buscarContaPorId(idClient);
-            Pedido pedidoAtual = servicoPedido.criarPedido(clienteBusca);
-            clienteBusca.addPedido(pedidoAtual);
-            System.out.println("Pedido criado: " + pedidoAtual.getIdPedido());
+            int validarPedido = ServicoValidacao.lerInteiros(sc,"Tem um pedido em andamento? [1]SIM[2]NAO");
+            Pedido pedidoAtual = null;
+            if (validarPedido == 2) {
+                pedidoAtual = servicoPedido.criarPedido(clienteBusca);
+                clienteBusca.addPedido(pedidoAtual);
+                System.out.println("Pedido criado: " + pedidoAtual.getIdPedido());
+            } else {
+                Long pedidoIdent = ServicoValidacao.lerLong(sc,"Digite o id do seu pedido: ");
+                pedidoAtual = pedidoDAO.buscarPedidoPorId(pedidoIdent,clienteBusca);
+            }
 
             int iniciandoPedido=0;
             while (iniciandoPedido != 3) {
                 iniciandoPedido = ServicoValidacao.lerInteiros(sc, "[1-ADICIONAR ITENS|2-FECHAR O PEDIDO|3-SAIR\n");
                 switch (iniciandoPedido) {
                     case 1:
-                        String produto = ServicoValidacao.lerString(sc, "Nome do produto: ");
-                        double precoProduto = ServicoValidacao.lerDouble(sc, "Preco do produto: ");
-                        Produto prod = servicoProduto.criarProduto(produto, precoProduto);
+                        Long produtoiD = ServicoValidacao.lerLong(sc,"Insira o iD do produto desejado:");
+                        Produto produto = produtoDAO.buscarProdutoPorId(produtoiD);
 
                         double precoVenda = ServicoValidacao.lerDouble(sc, "Preco de venda: ");
                         int quantidade = ServicoValidacao.lerInteiros(sc, "Quantidade desse produto: ");
-                        ItensPedido item = serviceItemPedido.criarItem(pedidoAtual,quantidade, precoVenda, prod);
+
+                        ItensPedido item = serviceItemPedido.criarItem(pedidoAtual,quantidade, precoVenda, produto);
                         servicoPedido.adicionarItem(pedidoAtual, item);
                         break;
                     case 2:
                         Long idPedido = ServicoValidacao.lerLong(sc, "Digite o iD do pedido: ");
-                        Pedido pedidoBusca = pedidoDAO.buscarPedidoPorId(idPedido,clienteBusca);
                         servicoPedido.fecharPedido(idPedido,clienteBusca);
                         System.out.println("Pedido finalizado!");
 
+                        Pedido pedidoBusca = pedidoDAO.buscarPedidoPorId(idPedido,clienteBusca);
                         System.out.print(pedidoBusca);
                         break;
                     case 3:

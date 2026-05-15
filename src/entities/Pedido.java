@@ -86,15 +86,6 @@ public class Pedido{
         this.precoPedido = precoPedido;
     }
 
-
-
-    public void finalizarPedido(){
-        if (itensPedidos.isEmpty()){
-            System.out.println("pedido vazio");
-        }
-        this.status = StatusPedido.FINALIZADO;
-    }
-
     public Long getIdPedido() {
         return idPedido;
     }

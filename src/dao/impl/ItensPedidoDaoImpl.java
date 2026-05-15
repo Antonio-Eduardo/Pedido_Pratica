@@ -49,7 +49,9 @@ public class ItensPedidoDaoImpl implements ItensPedidoDAO {
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
                 try (ResultSet rs = st.getGeneratedKeys()) {
-                    itensPedido.setiD(rs.getLong(1));
+                    if (rs.next()) {
+                        itensPedido.setiD(rs.getLong(1));
+                    }
                 }
             }
         } catch (SQLException e) {

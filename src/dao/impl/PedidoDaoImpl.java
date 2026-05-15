@@ -42,7 +42,9 @@ public class PedidoDaoImpl implements PedidoDAO {
            int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0){
                 try(ResultSet rsGenerated = st.getGeneratedKeys()){
-                    p.setIdPedido(rsGenerated.getLong(1));
+                    if (rsGenerated.next()) {
+                        p.setIdPedido(rsGenerated.getLong(1));
+                    }
                 }
             }
         } catch (SQLException e) {
